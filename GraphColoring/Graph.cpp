@@ -144,7 +144,7 @@ void Graph::color_graph() {
 	}
 }
 
-void Graph::color_bfs(int startNode) {
+void Graph::color_bfs(int startNode, int thread) {
 	Sleep(1000);
 	int v = startNode;
 	for (int i = v; i < V; i++) {
@@ -166,7 +166,7 @@ void Graph::color_bfs(int startNode) {
 		set_color(get_available_color(v),row, col);
 		updateCellColors(row, col);
 		//print_matrix();
-		Sleep(50);
+		Sleep(10);
 		
 
 
@@ -179,6 +179,7 @@ void Graph::color_bfs(int startNode) {
 		}
 		
 	}
+	bfsDone[thread] = true;
 
 }
 
@@ -205,6 +206,11 @@ void Graph::draw() {
 	}
 	while (window.isOpen())
 	{
+		for (int i = 0; i < NUM_OF_TASKS; i++) {
+			if (!bfsDone[i])
+				break;
+			window.close();
+		}
 		sf::Event event;
 		while (window.pollEvent(event))
 		{

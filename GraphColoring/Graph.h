@@ -5,8 +5,9 @@
 
 
 using namespace std;
-constexpr auto COLUMN_NUMBER = 40;
-constexpr auto ROW_NUMBER = 40;
+constexpr auto COLUMN_NUMBER = 50;
+constexpr auto ROW_NUMBER = 50;
+constexpr auto NUM_OF_TASKS = 1;
 
 
 
@@ -19,6 +20,7 @@ class Graph {
 	sf::RectangleShape cells[ROW_NUMBER][COLUMN_NUMBER];
 	tbb::concurrent_vector<bool> colored;
 	//bool colored[ROW_NUMBER * COLUMN_NUMBER];
+	bool bfsDone[NUM_OF_TASKS];
 	
 	
 
@@ -30,6 +32,10 @@ public:
 		for (int i = 0; i < V; i++) {
 			colored[i] = false;
 		}
+		for (int i = 0; i < NUM_OF_TASKS; i++) {
+			bfsDone[i] = false;
+		}
+		
 
 	}
 
@@ -46,7 +52,7 @@ public:
 	int get_color(int vertex);
 	void color_graph();
 	int get_available_color(int vertex);
-	void color_bfs(int startNode);
+	void color_bfs(int startNode, int thread);
 	void draw();
 	void updateCellColors(int row, int col);
 };
