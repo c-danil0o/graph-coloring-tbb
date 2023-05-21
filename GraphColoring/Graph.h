@@ -5,8 +5,8 @@
 
 
 using namespace std;
-constexpr auto COLUMN_NUMBER = 30;
-constexpr auto ROW_NUMBER = 30;
+constexpr auto COLUMN_NUMBER = 50;
+constexpr auto ROW_NUMBER = 50;
 constexpr auto NUM_OF_TASKS = 4;
 
 
@@ -46,6 +46,7 @@ public:
 	//void add_all_edges(int row, int col);
 	void add_all_edges(int x);
 	void parse_matrix();
+	void print_colored();
 	void print_graph();
 	void set_color(int color, int row, int col);
 	bool can_set_color(int color, int vertex);

@@ -33,6 +33,9 @@ int main() {
 	gr.run([&] {g.color_bfs(ROW_NUMBER * (COLUMN_NUMBER-1) + 1, 2); });
 	gr.run([&] {g.color_bfs(ROW_NUMBER*COLUMN_NUMBER - 5, 3); });
 	gr.wait();
+	//g.print_matrix();
+	cout << endl << endl;
+	//g.print_colored();
 	tick_count parallel_end = tick_count::now();
 	cout << "Parallel time: " << (parallel_end - parallel_begin).seconds() << endl;
 	//parallel_invoke(
