@@ -5,17 +5,17 @@
 
 
 using namespace std;
-constexpr auto COLUMN_NUMBER = 50;
-constexpr auto ROW_NUMBER = 50;
-constexpr auto NUM_OF_TASKS = 4;
+const int COLUMN_NUMBER = 100;
+const int ROW_NUMBER = 100;
+constexpr auto NUM_OF_TASKS = 8;
 
 
 class Graph {
 	int V; // graph size
-	int matrix[ROW_NUMBER][COLUMN_NUMBER];
+	//int matrix[ROW_NUMBER][COLUMN_NUMBER];
 	tbb::concurrent_vector<int> matrixC;
 	list <int>* adj; // list of lists for every node
-	sf::RectangleShape cells[ROW_NUMBER][COLUMN_NUMBER];
+	sf::RectangleShape** cells;
 	tbb::concurrent_vector<bool> colored;
 	//bool colored[ROW_NUMBER * COLUMN_NUMBER];
 	bool bfsDone[NUM_OF_TASKS];
@@ -26,16 +26,20 @@ public:
 	
 	Graph() {
 		this->V = ROW_NUMBER * COLUMN_NUMBER; adj = new list<int>[ROW_NUMBER * COLUMN_NUMBER];
-		colored.grow_by(V);
+		//colored.grow_by(V);
 		
 		for (int i = 0; i < V; i++) {
-			colored[i] = false;
+			//colored[i] = false;
+			colored.push_back(false);
 		}
 		for (int i = 0; i < NUM_OF_TASKS; i++) {
 			bfsDone[i] = false;
 		}
 		
-
+		cells = new sf::RectangleShape * [ROW_NUMBER];
+		for (int i = 0; i < ROW_NUMBER; i++) {
+			cells[i] = new sf::RectangleShape[COLUMN_NUMBER];
+		}
 	}
 
 	~Graph() { delete[]adj; }

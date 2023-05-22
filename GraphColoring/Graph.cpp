@@ -25,9 +25,9 @@ void Graph::add_edge(int v, int w) {
 
 
 void Graph::init_matrix() {
-	matrixC.grow_by(ROW_NUMBER * COLUMN_NUMBER);
+	//matrixC.grow_by(ROW_NUMBER * COLUMN_NUMBER);
 	for (int i = 0; i < ROW_NUMBER * COLUMN_NUMBER; i++) {
-		matrixC[i] = -1;
+		matrixC.push_back(-1);
 	}
 }
 
@@ -182,7 +182,7 @@ void Graph::color_bfs(int startNode, int thread) {
 		}
 	}
 
-	int queue[ROW_NUMBER * COLUMN_NUMBER];
+	int *queue = new int[ROW_NUMBER * COLUMN_NUMBER];
 	int front = 0, rear = 0;
 	colored[v] = true;
 	queue[rear++] = v;
@@ -192,9 +192,10 @@ void Graph::color_bfs(int startNode, int thread) {
 		int row = v / COLUMN_NUMBER;
 		int col = v % COLUMN_NUMBER;
 		set_color(get_available_color(v), row, col);
+		
 		updateCellColors(row, col);
 		//print_matrix();
-		Sleep(10);
+		Sleep(1);
 
 
 
@@ -207,6 +208,7 @@ void Graph::color_bfs(int startNode, int thread) {
 		}
 
 	}
+	delete[] queue;
 	bfsDone[thread] = true;
 
 }
@@ -237,11 +239,11 @@ void Graph::draw() {
 	}
 	while (window.isOpen())
 	{
-		/*for (int i = 0; i < NUM_OF_TASKS; i++) {
+		for (int i = 0; i < NUM_OF_TASKS; i++) {
 			if (!bfsDone[i])
 				break;
 			window.close();
-		}*/
+		}
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
