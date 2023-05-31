@@ -7,29 +7,23 @@
 using namespace std;
 const int COLUMN_NUMBER = 100;
 const int ROW_NUMBER = 100;
-constexpr auto NUM_OF_TASKS = 8;
+constexpr auto NUM_OF_TASKS = 4;
 
 
 class Graph {
 	int V; // graph size
-	//int matrix[ROW_NUMBER][COLUMN_NUMBER];
 	tbb::concurrent_vector<int> matrixC;
 	list <int>* adj; // list of lists for every node
 	sf::RectangleShape** cells;
 	tbb::concurrent_vector<bool> colored;
-	//bool colored[ROW_NUMBER * COLUMN_NUMBER];
 	bool bfsDone[NUM_OF_TASKS];
-	
-	
 
 public:
 	
 	Graph() {
 		this->V = ROW_NUMBER * COLUMN_NUMBER; adj = new list<int>[ROW_NUMBER * COLUMN_NUMBER];
-		//colored.grow_by(V);
-		
+
 		for (int i = 0; i < V; i++) {
-			//colored[i] = false;
 			colored.push_back(false);
 		}
 		for (int i = 0; i < NUM_OF_TASKS; i++) {
@@ -47,7 +41,6 @@ public:
 	void init_matrix();
 	void generate_nodes();
 	void print_matrix();
-	//void add_all_edges(int row, int col);
 	void add_all_edges(int x);
 	void parse_matrix();
 	void print_colored();

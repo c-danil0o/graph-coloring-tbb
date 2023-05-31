@@ -15,9 +15,6 @@ void start_serial() {
     gs.generate_nodes();
     gs.parse_matrix();
     parallel_invoke([&] {gs.draw(); }, [&] { gs.color_bfs(0, 0); });
-    //gs.color_bfs(0, 0);
-
-
 }
 void start_parallel() {
     Graph g;
@@ -26,20 +23,44 @@ void start_parallel() {
     g.parse_matrix();
     task_group gr;
     gr.run([&] {g.draw(); });
-   /* gr.run([&] { g.color_bfs(0, 0); });
+    //2
+    /*gr.run([&] { g.color_bfs(0, 0); });
+    gr.run([&] {g.color_bfs(ROW_NUMBER * COLUMN_NUMBER - 5, 1); });*/
+    //4
+    gr.run([&] { g.color_bfs(0, 0); });
     gr.run([&] {g.color_bfs(COLUMN_NUMBER - 5, 1); });
     gr.run([&] {g.color_bfs(ROW_NUMBER * (COLUMN_NUMBER - 1) + 1, 2); });
-    gr.run([&] {g.color_bfs(ROW_NUMBER * COLUMN_NUMBER - 5, 3); });*/
-    gr.run([&] {g.color_bfs(COLUMN_NUMBER * ROW_NUMBER / 8, 0); });
-    gr.run([&] {g.color_bfs(2*COLUMN_NUMBER * ROW_NUMBER / 8, 1); });
-    gr.run([&] {g.color_bfs(3*COLUMN_NUMBER * ROW_NUMBER / 8, 2); });
-    gr.run([&] {g.color_bfs(4*COLUMN_NUMBER * ROW_NUMBER / 8, 3); });
-    gr.run([&] {g.color_bfs(5*COLUMN_NUMBER * ROW_NUMBER / 8, 4); });
+    gr.run([&] {g.color_bfs(ROW_NUMBER * COLUMN_NUMBER - 5, 1); });
+    //6
+    /*gr.run([&] {g.color_bfs(COLUMN_NUMBER * ROW_NUMBER / 6, 0); });
+    gr.run([&] {g.color_bfs(2 * COLUMN_NUMBER * ROW_NUMBER / 6, 1); });
+    gr.run([&] {g.color_bfs(3 * COLUMN_NUMBER * ROW_NUMBER / 6, 2); });
+    gr.run([&] {g.color_bfs(4 * COLUMN_NUMBER * ROW_NUMBER / 6, 3); });
+    gr.run([&] {g.color_bfs(5 * COLUMN_NUMBER * ROW_NUMBER / 6, 4); });
+    gr.run([&] {g.color_bfs(6 * COLUMN_NUMBER * ROW_NUMBER / 6 - 3, 5); });*/
+    //8
+    /*gr.run([&] {g.color_bfs(COLUMN_NUMBER * ROW_NUMBER / 8, 0); });
+    gr.run([&] {g.color_bfs(2 * COLUMN_NUMBER * ROW_NUMBER / 8, 1); });
+    gr.run([&] {g.color_bfs(3 * COLUMN_NUMBER * ROW_NUMBER / 8, 2); });
+    gr.run([&] {g.color_bfs(4 * COLUMN_NUMBER * ROW_NUMBER / 8, 3); });
+    gr.run([&] {g.color_bfs(5 * COLUMN_NUMBER * ROW_NUMBER / 8, 4); });
     gr.run([&] {g.color_bfs(6 * COLUMN_NUMBER * ROW_NUMBER / 8, 5); });
     gr.run([&] {g.color_bfs(7 * COLUMN_NUMBER * ROW_NUMBER / 8, 6); });
-    gr.run([&] {g.color_bfs(8*COLUMN_NUMBER * ROW_NUMBER / 8 - 5, 7); });
-    gr.wait();
+    gr.run([&] {g.color_bfs(8 * COLUMN_NUMBER * ROW_NUMBER / 8 - 5, 7); });*/
+    //11
+    /*gr.run([&] {g.color_bfs(COLUMN_NUMBER * ROW_NUMBER / 11, 0); });
+    gr.run([&] {g.color_bfs(2 * COLUMN_NUMBER * ROW_NUMBER / 11, 1); });
+    gr.run([&] {g.color_bfs(3 * COLUMN_NUMBER * ROW_NUMBER / 11, 2); });
+    gr.run([&] {g.color_bfs(4 * COLUMN_NUMBER * ROW_NUMBER / 11, 3); });
+    gr.run([&] {g.color_bfs(5 * COLUMN_NUMBER * ROW_NUMBER / 11, 4); });
+    gr.run([&] {g.color_bfs(6 * COLUMN_NUMBER * ROW_NUMBER / 11, 5); });
+    gr.run([&] {g.color_bfs(7 * COLUMN_NUMBER * ROW_NUMBER / 11, 6); });
+    gr.run([&] {g.color_bfs(8 * COLUMN_NUMBER * ROW_NUMBER / 11, 7); });
+    gr.run([&] {g.color_bfs(9 * COLUMN_NUMBER * ROW_NUMBER / 11, 8); });
+    gr.run([&] {g.color_bfs(10 * COLUMN_NUMBER * ROW_NUMBER / 11, 9); });
+    gr.run([&] {g.color_bfs(11 * COLUMN_NUMBER * ROW_NUMBER / 11 -5, 10); });*/
 
+    gr.wait();
 }
 
 int main() {
@@ -62,6 +83,4 @@ int main() {
             cout << "Parallel time: " << (parallel_end - parallel_begin).seconds() << endl;
         }
     }
-
-
 }

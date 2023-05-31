@@ -12,9 +12,9 @@ using namespace std;
 const int row_operation[8] = { -1,0, 1, -1, 1, -1, 0, 1 };
 const int column_operation[8] = { -1, -1, -1, 0, 0,1,1,1 };
 
-random_device rd; // obtain a random number from hardware
-mt19937 gen(rd()); // seed the generator
-uniform_int_distribution<> distr(0, 7); // define the range
+random_device rd;
+mt19937 gen(rd());
+uniform_int_distribution<> distr(0, 7);
 
 int available_colors = 6;
 
@@ -25,7 +25,6 @@ void Graph::add_edge(int v, int w) {
 
 
 void Graph::init_matrix() {
-	//matrixC.grow_by(ROW_NUMBER * COLUMN_NUMBER);
 	for (int i = 0; i < ROW_NUMBER * COLUMN_NUMBER; i++) {
 		matrixC.push_back(-1);
 	}
@@ -48,7 +47,6 @@ void Graph::generate_nodes() {
 				continue;
 			}
 
-			//matrixC[x + column_operation[random_number] + COLUMN_NUMBER * row_operation[random_number]];
 			matrixC[(i + row_operation[random_number]) * COLUMN_NUMBER + j + column_operation[random_number]] = 0;
 			break;
 		}
@@ -84,7 +82,6 @@ void Graph::print_colored() {
 			}
 			if (j == COLUMN_NUMBER - 1)
 				cout << endl;
-
 		}
 	}
 }
@@ -97,7 +94,6 @@ void Graph::print_graph() {
 			cout << *it << "|";
 		}
 		cout << endl;
-
 	}
 }
 
@@ -188,15 +184,12 @@ void Graph::color_bfs(int startNode, int thread) {
 	queue[rear++] = v;
 	while (front != rear) {
 		v = queue[front++];
-		//system("cls");
 		int row = v / COLUMN_NUMBER;
 		int col = v % COLUMN_NUMBER;
 		set_color(get_available_color(v), row, col);
 		
 		updateCellColors(row, col);
-		//print_matrix();
 		Sleep(1);
-
 
 
 		list<int>::iterator it = adj[v].begin();
@@ -252,8 +245,6 @@ void Graph::draw() {
 		}
 		window.clear();
 
-
-
 		// Draw the matrix
 		for (int i = 0; i < ROW_NUMBER; i++)
 		{
@@ -264,8 +255,6 @@ void Graph::draw() {
 		}
 
 		window.display();
-
-		//updateCellColors(cells, matrix);
 	}
 }
 
